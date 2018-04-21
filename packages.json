@@ -1,0 +1,16 @@
+{
+	"schema_version": "3.0.0",
+	"packages": [
+		{
+			"name": "Chaussette",
+			"details": "https://github.com/lanathlor/Chaussette_sublime",
+			"labels": ["color sheme"],
+			"releases": [
+				{
+					"sublime_text": "*",
+					"tags": true
+				}
+			]
+		}
+	]
+}
