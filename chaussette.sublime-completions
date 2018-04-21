@@ -1,0 +1,9 @@
+{
+	"scope": "source.lps",
+
+	"completions": [
+		{ "trigger": "? if", "contents": "? if\n\n? endif" },
+		{ "trigger": "???", "contents": "? if\n? endif" },
+		{ "trigger": "<name", "contents": "<name=\"\", arguments=\"\", function=\"\n\n\">"},
+	]
+}

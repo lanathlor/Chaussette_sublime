@@ -1,0 +1,90 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+file_extensions:
+  - lps 
+scope: source.lps
+
+contexts:
+  prototype:
+    - include: comments
+
+  main:
+    - include: keywords
+    - include: numbers
+    - include: strings
+    - include: function
+    - include: variable_from_C
+    - include: func_name
+    - include: param_name
+    - include: oper
+
+  keywords:
+    - match: (\? if|# elseif|# else|\? endif|<|>|return)
+      scope: keyword.control.lps
+
+  function:
+    - match: '! '
+      push: func_next
+  func_next:
+    - meta_include_prototype: false
+    - meta_content_scope: storage.type.lps
+    - match: (\s|\()
+      scope: source.lps
+      pop: true
+
+  numbers:
+    - match: '\b((-)?[0-9.]+)\b'
+      scope: constant.numeric.lps
+
+  oper:
+    - match: (-|\+|\*|/)
+      scope: constant.numeric.lps
+
+  variable_from_C:
+    - match: '(#)+[A-Z,a-z,0-9]+'
+      scope: variable.language.lps
+
+  func_name:
+    - match: 'name="'
+      scope: source.lps
+      push: func_name_next
+
+  func_name_next:
+    - meta_include_prototype: false
+    - meta_content_scope: keyword.declaration.lps
+    - match: '"'
+      pop: true
+
+  param_name:
+    - match: 'arguments="'
+      scope: source.lps
+      push: param_name_next
+
+  param_name_next:
+    - meta_include_prototype: false
+    - meta_content_scope: variable.parameter.lps
+    - match: '"'
+      pop: true
+
+  strings:
+    - match: '\'''
+      scope: punctuation.definition.string.begin.lps
+      push: inside_string
+
+  inside_string:
+    - meta_include_prototype: false
+    - meta_scope: string.quoted.double.lps
+    - match: '\.'
+      scope: constant.character.escape.lps
+    - match: '\'''
+      scope: punctuation.definition.string.end.lps
+      pop: true
+
+  comments:
+    - match: '/'
+      scope: punctuation.definition.comment.lps
+      push:
+        - meta_scope: comment.line.double-slash.lps
+        - match: $\n?
+          pop: true
