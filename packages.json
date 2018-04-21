@@ -7,7 +7,7 @@
 			"labels": ["color sheme"],
 			"releases": [
 				{
-					"sublime_text": "*",
+					"sublime_text": "3092",
 					"tags": true
 				}
 			]
